@@ -1,0 +1,191 @@
+/*
+ Colorcombo: http://www.colorcombos.com/color-schemes/7095/ColorCombo7095.html
+*/
+body {
+  background-color: #DDDDDD;
+  margin: 0;
+  min-width: 800px;
+  font-family: sans-serif;
+}
+/* Pääosat */
+.top {
+  background-color: #2F343A;
+  color: #80CEB9;
+  width: 100%;
+  height: 150px;
+  text-align:center;
+  position: relative;
+}
+.content {
+  color: #2F343A;
+}
+.content > div {
+  display: none;
+}
+/* Perus sisällöt */
+h1 {
+  position: relative;
+  top: 20%;
+  vertical-align:middle;
+  font-size: 3em;
+  font-family: bebas neue;
+}
+.topics {
+  width: 95%;
+  margin: -10px auto;
+  position: absolute;
+  text-align:center;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.topic {
+  height: 50px;
+  display:inline-block;
+  margin: 0px 0px;
+  font-size: 1.3em;
+}
+a {
+  text-decoration: none;
+  color: #717D8C;
+}
+.channels {
+  margin-bottom: 10px;
+}
+.channel {
+  height: 35px;
+  display:inline-block;
+  margin: 0px 20px;
+  font-size: 1.3em;
+}
+.dates {
+  display: none;
+  margin-bottom: 30px;
+  overflow: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 710px;
+}
+.date {
+  display:inline-block;
+  margin: 0px 10px;
+  font-size: 1em;
+}
+.date a {
+  height: 25px;
+}
+.datelogs {
+  text-align: center;
+}
+.datelog {
+  background:url(load.gif) no-repeat center 100px;
+  width: 800px;
+  min-height: 200px;
+  display: none;
+  text-align: left;
+}
+.datelog-pre {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.profiles {
+}
+.settings {
+  text-align: center;
+}
+.settingsCenter {
+  width: 500px;
+  display: inline-block;
+}
+.settingGroup {
+  padding: 10px 0px;
+  border-style: none none groove none;
+  width: 500px;
+  text-align: left;
+}
+.setting {
+  width: 500px;
+  height: 30px;
+  vertical-align: middle;
+}
+.settingName {
+  width: 300px;
+  float: left;
+  line-height: 30px;
+}
+.settingValue {
+  float: right;
+}
+.settingValue input {
+  height: 24px;
+  margin: 3px 0px;
+}
+.update {
+  padding: 10px;
+}
+.update input {
+  line-height: 30px;
+  font-size: 14px;
+  padding-left: 10px;
+  background-color: #BDB69C;
+  color: #2F343A;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 2px solid #999999;
+  cursor: pointer;
+  width: 80px;
+}
+
+/* https://proto.io/freebies/onoff/ */
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    margin-top: 1px;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 24px; padding: 0; line-height: 24px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #BDB69C; color: #2F343A;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #717D8C; color: #DDDDDD;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 20px; margin: 2px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 62px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}

@@ -1,0 +1,16 @@
+body {
+  margin-top: 13%;
+  background-color: #DDDDDD;
+}
+
+#logInCenterizingDiv {
+  margin: 50px;
+  padding: 20px;
+  width: 200px;
+  background-color: #BDB69C;
+  border-radius: 4px;
+}
+
+#logInButton {
+  margin-top: 15px;
+}

@@ -1,0 +1,47 @@
+#!/bin/bash
+j=0;
+file="test.log";
+declare -A months=( ["Jan"]="01" ["Feb"]="02" ["Mar"]="03" ["Apr"]="04" ["May"]="05" ["Jun"]="06" ["Jul"]="07" ["Aug"]="08" ["Seb"]="09" ["Oct"]="10" ["Nov"]="11" ["Dec"]="12" );
+IFS='
+';
+for p in $(sed 's/\x3[0-9]*//g' tomiz.log | sed 's/\xf6/ö/g' | sed 's/\xd6/Ö/g' | sed 's/\xe4/ä/g' | sed 's/\xc4/Ä/g' | sed 's/\xf//g'); do
+  if [[ "${p:0:8}" == "Session " ]]; then
+    if [[ "${p:8:7}" == "Start: " ]]; then
+      Y="${p:35:4}";
+      m=${months["${p:19:3}"]};
+      d="${p:23:2}";
+      if [[ $file != "$Y-$m-$d.log" ]]; then
+        echo "---THE-END---" >> $file;
+        file="$Y-$m-$d.log";
+        echo "$file";
+      fi
+    elif [[ "${p:8:6}" == "Time: " ]]; then
+      Y="${p:34:4}";
+      m=${months["${p:18:3}"]};
+      d="${p:22:2}";
+      if [[ $file != "$Y-$m-$d.log" ]]; then
+        echo "---THE-END---" >> $file;
+        file="$Y-$m-$d.log";
+        echo "$file";
+      fi
+    fi
+  elif [[ ${#p} == 1 || "${p:7:15}" == " * Disconnected" || "${p:7:32}" == " * Attempting to rejoin channel " || "${p:7:18}" == " * Now talking in " || "${p:7:12}" == " * Topic is " || "${p:7:10}" == " * Set by " ]]; then
+    continue;
+  else
+    if [[ "${p:7:3}" == " * " ]]; then
+      second=$(echo "${p:10}" | awk '{print substr($0,index($0," ")+1)}')
+      if [[ "${second:0:1}" == "(" ]]; then
+        p=$(echo "$p" | sed 's/*/-!-/1' | sed 's/(/\[/1' | sed 's/) Quit (/\] has quit \[/1' | sed 's/\(.*\))/\1\]/');
+      elif [[ "${second:0:11}" == "sets mode: " ]]; then
+        kuka=$(echo "$p" | awk '{print $3}');
+        mita=$(echo "$p" | sed 's#.*sets mode: \(\)#\1#' | sed 's/\n//g' | sed 's/\r//g');
+        p=$(echo "${p:0:10}mode/#ikariam.fi-team [$mita] by $kuka" | sed 's/*/-!-/1');
+      elif [[ "${second:0:16}" == "is now known as " || "${second:0:26}" == "users have been split from" || "${second:0:19}" == "users have rejoined" ]]; then
+        p=$(echo "$p" | sed 's/*/-!-/1');
+      elif [[ "${second:0:13}" == "now known as " ]]; then
+        p=$(echo "$p" | sed 's/*/-!-/1' | sed "s/'re/ is/1");
+      fi
+    fi
+    echo "$(echo "$p" | sed 's/\[//1' | sed 's/\]/:00/1')" >> $file;
+  fi
+done
