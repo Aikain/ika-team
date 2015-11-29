@@ -40,11 +40,13 @@
     }
   }
   if (!file_exists("log/" . $kannu . "/" . $date . ".log")) {
-    echo "Kertokees miks meil ei oo lokia päivältä '$date'...";
+    echo "Kertokees miks meil ei oo lokia päivältä '$date'..";
   } else {
     $file = file("log/" . $kannu . "/" . $date . ".log", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($file as $line_num => $line) {
-      echo $line . "\n";
+      if (substr($line,0,13) != "---THE-END---") {
+        echo $line . "\n";
+      }
     }
   }
 ?>

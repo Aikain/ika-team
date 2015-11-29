@@ -4,7 +4,7 @@
 ?>
 <html lang="fi">
   <head>
-    <title>Random - mitäpä muutakaan.</title>
+    <title>ikariam.fi-Team</title>
     <meta charset="UTF-8">
     <script src="lib/jquery.min.js"></script>
     <script src="index.js"></script>
@@ -32,15 +32,12 @@
           <div class="channels"><?php foreach (glob("logs/*") as $f) { $f = explode("/", $f)[1]; $f = substr($f, 0, strrpos( $f, '.')); ?>
             <div class="channel"><a href="#logs/<?=$f ?>/today"><?=$f ?></a></div>
           <?php  } ?></div>
-          <div class="dates">
-            <div class="date" id="today"><a href=''>Tänään</a></div>
-            <div class="date" id="yesterday"><a href=''>Eilen</a></div>
-            <?php for ($i = 2; $i < 7; $i++) { $d = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d')-$i, date('Y'))); ?>
-              <div class="date" id="date<?=$d ?>"><a href=''><?=$d ?></a></div>
-            <?php } ?>
+          <div class="datebar">
+            <div class="arrow left"><a href onclick="moveToLeft(); return false;">&lt;</a></div>
+            <div class="arrow right"><a href onclick="moveToRight(); return false;">&gt;</a></div>
+            <div class="dates">
+            </div>
           </div>
-          <button onclick="moveToRight()">Test oikea</button>
-          <button onclick="moveToLeft()">Test vasen</button>
         </center>
         <div class="datelogs">
         </div>

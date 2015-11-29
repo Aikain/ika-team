@@ -23,26 +23,31 @@ function update() {
     $(".date a").css("font-size", "1em").css("font-weight", "normal");;
     $(".datelog").hide();
 
+    oldChannel = channel;
     channel = location.href.split("#")[2];
     if (!channel) {
-      $(".dates").hide();
+      $(".datebar").hide();
       return;
     }
     channel = channel.split("/")[0];
+    if (oldChannel != "" && oldChannel != channel) {
+      $(".date a").each(function() { $(this).attr("href", $(this).attr("href").replace(oldChannel, channel));  })
+    }
 
     $(".channel a").filter(function() {
       return $(this).text() == "#" + channel;
     }).css("font-size", "25px").css("font-weight", "bold");
 
-    $(".dates").show();
-    $(".date").children().each(function(index, value){ 
-      value.href = '#logs/#' + channel + "/" + value.parentElement.id.replace("date", "");
-    });
+    $(".datebar").show();
 
     date = location.href.split("#")[2].split("/")[1];
     if (!date) {
       $(".datelogs").hide();
       return;
+    } else if (!$(".dates").children().length) {
+      while ( width < 600) {
+        createDate();
+      }
     }
 
     $(".date a").filter(function() {
@@ -66,6 +71,7 @@ function getLog() {
   d = $("<div class='datelog'><pre class='datelog-pre'>");
   d.attr("id", "log-" + channel + "-" + date);
   $(".datelogs").append(d);
+  d.children().css("height", window.innerHeight - 350 + "px");
   d.css("display", "inline-block");
   $.get("log.php?channel=" + channel + "&date=" + date, function(data) {
     a = this.url.split("?")[1].split("&");
@@ -88,17 +94,68 @@ function updateLog(log, text) {
   log.css("background", "none");
 }
 
-var loc = 10;
-function moveToRight() {
-  for (i = 0; i < 7; i++) {
-    d = "2015-11-20";
-    $(".dates").append("<div class='date' id='date" + d + "'><a href='#logs/" + channel + "/" + d + "'>" + d + "</a></div>");
+var loc = 0;
+var width = 0;
+
+function createDate() {
+  text = "";
+  if ($(".date").last().length) {
+    d = new Date(new Date($(".date").last().attr("id").replace("date", "")).setHours(0,0,0,0) - 1000 * 60 * 60 * 24);
+    if (d.getTime() == new Date(new Date().setHours(0,0,0,0) - 1000 * 60 * 60 * 24).getTime()) {
+      text = "yesterday";
+    }
+  } else if (date == "today") {
+    text = "today";
+    d = new Date(new Date().setHours(0,0,0,0));
+  } else if (date == "yesterday") {
+    text = "yesterday";
+    d = new Date(new Date().setHours(0,0,0,0) - 1000 * 60 * 60 * 24);
+  } else {
+    d = new Date(new Date(date).setHours(0,0,0,0));
   }
-  loc += 710;
-  $(".dates").animate({scrollLeft: loc}, 1000);
+  d = d.getFullYear() + "-" + pad(d.getMonth()+1+"") + "-" + pad(d.getDate()+""); 
+  text = text.length == 0 ? d : text;
+  div = $("<div class='date' id='date" + d + "'><a href='#logs/#" + channel + "/" + text + "' >" + text + "</a></div>");
+  $(".dates").append(div);
+  width += div.outerWidth(true);
+}
+
+function reverseCreateDate() {
+  text = "";
+  if ($(".date").first().text() != "today") {
+    d = new Date(new Date($(".date").first().attr("id").replace("date", "")).setHours(0,0,0,0) + 1000 * 60 * 60 * 24);
+    if (d.getTime() == new Date(new Date().setHours(0,0,0,0) - 1000 * 60 * 60 * 24).getTime()) {
+      text = "yesterday";
+    } else if (d.getTime() == new Date(new Date().setHours(0,0,0,0)).getTime()) {
+      text = "today";
+    } else {
+      text = d.getFullYear() + "-" + pad(d.getMonth()+1+"") + "-" + pad(d.getDate()+"");
+    }
+    d = d.getFullYear() + "-" + pad(d.getMonth()+1+"") + "-" + pad(d.getDate()+"");
+    div = $("<div class='date' id='date" + d + "'><a href='#logs/#" + channel + "/" + text + "' >" + text + "</a></div>");
+    $(".dates").prepend(div);
+    $(".dates").scrollLeft($(".dates").scrollLeft() + div.outerWidth(true));
+    width += div.outerWidth(true);
+    loc += div.outerWidth(true);
+  } else {
+    loc = 0;
+  }
+}
+
+function pad(n){
+ return n.length == 1 ? "0" + n : n;
+}
+function moveToRight() {
+  loc += 550;
+  while ( width - 550 < loc ) {
+    createDate();
+  }
+  $(".dates").animate({scrollLeft: loc}, 400);
 }
 function moveToLeft() {
-  loc -= 710;
-  if (loc < 0) loc = 10;
-  $(".dates").animate({scrollLeft: loc}, 1000);
+  loc -= 550;
+  while (loc < 0) {
+    reverseCreateDate();
+  }
+  $(".dates").animate({scrollLeft: loc}, 400);
 }
