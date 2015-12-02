@@ -13,6 +13,7 @@
     <link rel="alternate" hreflang="fi" href="http://gosu.fi/" />
   </head>
   <body>
+    <div class="infobubble"><p>Infoo</p><button onclick="$(this).parent().hide()">OK</button></div>
     <div class="top">
       <h1>ikariam.fi-Team</h1>
       <div class="topics">
@@ -52,19 +53,18 @@
           </tbody></table>
         </center>
       </div>
-      <div id="personal" class="personal"><center><h2>Omasivu</h2><?=$_SESSION["name"] ?>, tämä on sinun oma sivusi!</center></div>
+      <div id="personal" class="personal"><center><h2>Omasivu</h2><?=$_SESSION["user"]["username"] ?>, tämä on sinun oma sivusi!</center></div>
       <div id="profile" class="profile">
-        <?php $user = array_unique(getUser($_SESSION["id"])); unset($user["password"]); ?>
         <center>
-          <h2><?=$user["username"] ?>'s Profiili</h2>
+          <h2><?=$_SESSION["user"]["username"] ?>'s Profiili</h2>
         </center>
         <div class="settings"><div class="settingsCenter">
-          <form method='POST' action="profile.php">
+          <form method='POST'>
             <div class="settingGroup">
               <div class="setting">
                 <div class="settingName">Käyttäjänimi</div>
                 <div class="settingValue">
-                  <input type="text" name="username" value="<?=$user['username'] ?>" readonly>
+                  <input type="text" name="username" value="<?=$_SESSION['user']['username'] ?>" readonly>
                 </div>
               </div>
             </div>
@@ -90,32 +90,48 @@
             </div>
             <div class="settingGroup">
               <div class="setting">
-                <div class="settingName">Join/Part/Leave-messaget näkyvissä</div>
+                <div class="settingName">Join/Part/Leave-messaget</div>
                 <div class="settingValue">
-                  <div class="onoffswitch"><input type="checkbox" name="join-part-leave" class="onoffswitch-checkbox" id="join-part-leave" checked>
+                  <div class="onoffswitch"><input type="checkbox" name="join-part-leave" class="onoffswitch-checkbox" id="join-part-leave" <?=$_SESSION["user"]["jpl"] == "1" ? "checked" : "" ?>>
                     <label class="onoffswitch-label" for="join-part-leave"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label>
                   </div>
                 </div>
               </div>
               <div class="setting">
-                <div class="settingName">Kanavan oikeuksien muutokset näkyvissä</div>
+                <div class="settingName">Kanavan oikeuksien muutokset</div>
                 <div class="settingValue">
-                  <div class="onoffswitch"><input type="checkbox" name="mode" class="onoffswitch-checkbox" id="mode" checked>
+                  <div class="onoffswitch"><input type="checkbox" name="mode" class="onoffswitch-checkbox" id="mode" <?=$_SESSION["user"]["mode"] == "1" ? "checked" : "" ?>>
                     <label class="onoffswitch-label" for="mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label>
                   </div>
                 </div>
               </div>
               <div class="setting">
-                <div class="settingName">Nimenvaihdot näkyvissä</div>
+                <div class="settingName">Nimenvaihdot</div>
                 <div class="settingValue">
-                  <div class="onoffswitch"><input type="checkbox" name="namechange" class="onoffswitch-checkbox" id="namechange" checked>
+                  <div class="onoffswitch"><input type="checkbox" name="namechange" class="onoffswitch-checkbox" id="namechange" <?=$_SESSION["user"]["nickchange"] == "1" ? "checked" : "" ?>>
                     <label class="onoffswitch-label" for="namechange"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="settingGroup">
+              <div class="setting">
+                <div class="settingName">Nickcolor</div>
+                <div class="settingValue">
+                  <div class="onoffswitch"><input type="checkbox" name="nickcolor" class="onoffswitch-checkbox" id="nickcolor" <?=$_SESSION["user"]["nickcolor"] == "1" ? "checked" : "" ?>>
+                    <label class="onoffswitch-label" for="nickcolor"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="setting">
+                <div class="settingName">Värini</div>
+                <div class="settingValue">
+                  <input type="color" name="color" value='<?=$_SESSION["user"]["color"] ?>'>
+                </div>
+              </div>
+            </div>
             <div class="update">
-              <input type="submit" value="Päivitä">
+              <input type="submit" value="Päivitä" onclick="updateProfile(); return false;">
             </div>
           </form>
         </div></div>

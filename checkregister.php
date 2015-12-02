@@ -1,5 +1,5 @@
 <?php
-  die("Käyttäjiä ei voi juuri nyt lisätä.");
+  die("You're fired!");
   session_start();
   include("mysql.php");
 

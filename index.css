@@ -7,7 +7,6 @@ body {
   min-width: 800px;
   font-family: sans-serif;
 }
-/* Pääosat */
 .top {
   background-color: #2F343A;
   color: #80CEB9;
@@ -22,7 +21,42 @@ body {
 .content > div {
   display: none;
 }
-/* Perus sisällöt */
+.infobubble {
+  position: fixed;
+  width: 200px;
+  height: 100px;
+  background: #BDB69C;
+  border-radius: 20px;
+  border: 3px solid #000000;
+  z-index: 10;
+  top: 40%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -50px;
+  text-align: center;
+  display: none;
+}
+.infobubble p {
+
+}
+.infobubble button {
+  width: 60px;
+  position: absolute;
+  bottom: 10px;
+  margin-left: -30px;
+  background-color: #ADA27C;
+  border-radius: 20px;
+  border: 2px solid #999999;
+  cursor: pointer;
+  line-height: 30px;
+  font-size: 14px;
+  padding-left: 10px;
+  color: #2F343A;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+  outline: 0
+}
 h1 {
   position: relative;
   top: 20%;
@@ -75,7 +109,7 @@ a {
   float: right;
 }
 .dates {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   overflow: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -99,6 +133,9 @@ a {
   min-height: 200px;
   display: none;
   text-align: left;
+  border-radius: 20px;
+  border: 2px solid #999999;
+  padding: 0px 10px;
 }
 .datelog-pre {
   white-space: -moz-pre-wrap;
@@ -130,7 +167,7 @@ a {
   vertical-align: middle;
 }
 .settingName {
-  width: 300px;
+  width: 250px;
   float: left;
   line-height: 30px;
 }
@@ -138,25 +175,39 @@ a {
   float: right;
 }
 .settingValue input {
+  background-color: #BDB69C;
+  border-radius: 20px;
+  border: 2px solid #999999;
+  font-size: 14px;
+  padding: 0px 10px;
+  color: #2F343A;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
   height: 24px;
   margin: 3px 0px;
+  outline: 0;
+}
+.settingValue input[type="color"] {
+  cursor: pointer;
 }
 .update {
   padding: 10px;
 }
 .update input {
+  background-color: #BDB69C;
+  border-radius: 20px;
+  border: 2px solid #999999;
+  cursor: pointer;
   line-height: 30px;
   font-size: 14px;
   padding-left: 10px;
-  background-color: #BDB69C;
   color: #2F343A;
   font-family: Trebuchet, Arial, sans-serif;
   font-weight: bold;
   box-sizing: border-box;
-  border-radius: 20px;
-  border: 2px solid #999999;
-  cursor: pointer;
   width: 80px;
+  outline: 0;
 }
 
 /* https://proto.io/freebies/onoff/ */

@@ -8,6 +8,9 @@ $(window).on('load', function() {
   } else {
     update();
   }
+  $(window).resize(function() {
+    $(".datelog:visible").children().css("height", window.innerHeight - 350 + "px");
+  });
 });
 $(window).on('hashchange', function(a) {
   update();
@@ -73,10 +76,9 @@ function getLog() {
   $(".datelogs").append(d);
   d.children().css("height", window.innerHeight - 350 + "px");
   d.css("display", "inline-block");
-  $.get("log.php?channel=" + channel + "&date=" + date, function(data) {
+  $.get("log.php?channel=" + channel + "&date=" + date, {dataType: 'html'}, function(data) {
     a = this.url.split("?")[1].split("&");
-    $("[id*='log-" + a[0].split("=")[1] + "-" + a[1].split("=")[1] + "']").children().text(data);
-    $("[id*='log-" + a[0].split("=")[1] + "-" + a[1].split("=")[1] + "']").css("background", "none");
+    updateLog($("[id*='log-" + a[0].split("=")[1] + "-" + a[1].split("=")[1] + "']"), data)
   }).fail(function(data) {
     a = this.url.split("?")[1].split("&");
     logElement = $("[id*='log-" + a[0].split("=")[1] + "-" + a[1].split("=")[1] + "']");
@@ -90,7 +92,7 @@ function getLog() {
 }
 
 function updateLog(log, text) {
-  log.children().text(text);
+  log.children().html(text);
   log.css("background", "none");
 }
 
@@ -158,4 +160,22 @@ function moveToLeft() {
     reverseCreateDate();
   }
   $(".dates").animate({scrollLeft: loc}, 400);
+}
+function updateProfile() {
+  $(".settingsCenter").css("background", "url(load.gif) no-repeat center 100px");
+  $.ajax({
+      url:"profile.php",
+      type:"POST",
+      data:$(".settings form").serializeArray()
+  }).done(function (data) {
+    $(".settingsCenter").css("background", "none");
+    showInfo("Profiili päivitetty" + data);
+  }).fail(function(data) {
+    $(".settingsCenter").css("background", "none");
+    showInfo("Error: " + data.status + " (" + data.statusText + ")");
+  });
+}
+function showInfo(info) {
+  $(".infobubble p").text(info);
+  $(".infobubble").show();
 }

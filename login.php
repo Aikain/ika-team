@@ -3,6 +3,8 @@
     <head>
         <title>ikariam.fi-Team - Sisäänkirjautuminen</title>
         <link rel="stylesheet" type="text/css" href="login.css" />
+        <script src="lib/jquery.min.js"></script>
+        <script src="login.js"></script>
     </head>
     <body id="body">
         <center>

@@ -13,4 +13,15 @@
     $kysely->execute(array($id));
     return $kysely->fetch();
   }
+
+  function getColors() {
+    global $yhteys;
+    $kysely = $yhteys->prepare("SELECT username, color FROM members");
+    $kysely->execute();
+    $colors = Array();
+    while ($rivi = $kysely->fetch()) {
+      $colors[$rivi["username"]] = $rivi["color"];
+    }
+    return $colors;
+  }
 ?>
