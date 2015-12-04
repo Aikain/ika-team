@@ -67,7 +67,27 @@ function update() {
     } else {
       getLog();
     }
+  } else if (page == "paste") {
+    $("#oldPaste").parent().hide();
+    id = location.href.split("#")[1].split("/")[1];
+    if (id) {
+      getPaste(id);
+    }
   }
+}
+
+function getPaste(id) {
+  $.get("paste.php?id=" + id, function (data) {
+    $("#oldPaste").text(data);
+    $("#oldPaste").parent().show();
+  }).fail(function(data) {
+    if (data.status == 401) {
+      showInfo(data.respondeText)
+      location.href = "login.php";
+    } else {
+      showInfo("Error: " + data.status + " (" + data.statusText + ")");
+    }
+  });
 }
 
 function getLog() {
@@ -102,8 +122,8 @@ var width = 0;
 function createDate() {
   text = "";
   if ($(".date").last().length) {
-    d = new Date(new Date($(".date").last().attr("id").replace("date", "")).setHours(0,0,0,0) - 1000 * 60 * 60 * 24);
-    if (d.getTime() == new Date(new Date().setHours(0,0,0,0) - 1000 * 60 * 60 * 24).getTime()) {
+    d = new Date(new Date($(".date").last().attr("id").replace("date", "")).setHours(-24,0,0,0));
+    if (d.getTime() == new Date().setHours(-24,0,0,0)) {
       text = "yesterday";
     }
   } else if (date == "today") {
@@ -111,7 +131,7 @@ function createDate() {
     d = new Date(new Date().setHours(0,0,0,0));
   } else if (date == "yesterday") {
     text = "yesterday";
-    d = new Date(new Date().setHours(0,0,0,0) - 1000 * 60 * 60 * 24);
+    d = new Date(new Date().setHours(-24,0,0,0));
   } else {
     d = new Date(new Date(date).setHours(0,0,0,0));
   }
@@ -125,8 +145,8 @@ function createDate() {
 function reverseCreateDate() {
   text = "";
   if ($(".date").first().text() != "today") {
-    d = new Date(new Date($(".date").first().attr("id").replace("date", "")).setHours(0,0,0,0) + 1000 * 60 * 60 * 24);
-    if (d.getTime() == new Date(new Date().setHours(0,0,0,0) - 1000 * 60 * 60 * 24).getTime()) {
+    d = new Date(new Date($(".date").first().attr("id").replace("date", "")).setHours(24,0,0,0));
+    if (d.getTime() == new Date().setHours(-24,0,0,0)) {
       text = "yesterday";
     } else if (d.getTime() == new Date(new Date().setHours(0,0,0,0)).getTime()) {
       text = "today";
@@ -147,19 +167,25 @@ function reverseCreateDate() {
 function pad(n){
  return n.length == 1 ? "0" + n : n;
 }
-function moveToRight() {
-  loc += 550;
-  while ( width - 550 < loc ) {
-    createDate();
+function moveToRight(a) {
+  while (a > 0) {
+    loc += a > 1000 ? 1000 : a;
+    while ( width - a < loc ) {
+      createDate();
+    }
+    $(".dates").animate({scrollLeft: loc}, 100000/a);
+    a -= 1000;
   }
-  $(".dates").animate({scrollLeft: loc}, 400);
 }
-function moveToLeft() {
-  loc -= 550;
-  while (loc < 0) {
-    reverseCreateDate();
+function moveToLeft(a) {
+  while (a > 0) {
+    loc -= a > 1000 ? 1000 : a;
+    while (loc < 0) {
+      reverseCreateDate();
+    }
+    $(".dates").animate({scrollLeft: loc}, 100000/a );
+    a -= 1000;
   }
-  $(".dates").animate({scrollLeft: loc}, 400);
 }
 function updateProfile() {
   $(".settingsCenter").css("background", "url(load.gif) no-repeat center 100px");
@@ -178,4 +204,25 @@ function updateProfile() {
 function showInfo(info) {
   $(".infobubble p").text(info);
   $(".infobubble").show();
+}
+function showInfoHtml(info) {
+  $(".infobubble p").html(info);
+  $(".infobubble").show();
+}
+function sendPaste() {
+  $(".paste").css("background", "url(load.gif) no-repeat center 100px");
+  $.ajax({
+    url:"paste.php",
+    type:"POST",
+    data:$(".paste form").serializeArray()
+  }).done(function (data) {
+    $(".paste").css("background", "none");
+    showInfoHtml("<input type='text' value='" + location.href.split("#")[0] + "#paste/" + data + "'>");
+    $(".infobubble p").children().select();
+    location.href = "#paste/" + data;
+  }).fail(function(data) {
+    $(".paste").css("background", "none");
+    showInfo("Error: " + data.status + " (" + data.statusText + ")");
+  });
+
 }

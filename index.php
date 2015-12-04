@@ -20,6 +20,7 @@
         <div class="topic"><a href="#main/">Etusivu</a> | </div>
         <div class="topic"><a href="#logs/">Logit</a> | </div>
         <div class="topic"><a href="#scripts/">Scriptit</a> | </div>
+        <div class="topic"><a href="#paste/">Paste</a> | </div>
         <div class="topic"><a href="#personal/">Omasivu</a> | </div>
         <div class="topic"><a href="#profile/">Profiili</a> | </div>
         <div class="topic"><a href="logout.php">Kirjaudu ulos</a></div>
@@ -34,8 +35,12 @@
             <div class="channel"><a href="#logs/<?=$f ?>/today"><?=$f ?></a></div>
           <?php  } ?></div>
           <div class="datebar">
-            <div class="arrow left"><a href onclick="moveToLeft(); return false;">&lt;</a></div>
-            <div class="arrow right"><a href onclick="moveToRight(); return false;">&gt;</a></div>
+<!--            <div class="arrow left"><a href onclick="moveToLeft(37000); return false;">&laquo;</a></div>-->
+            <div class="arrow left"><a href onclick="moveToLeft(3000); return false;">&laquo;</a></div>
+            <div class="arrow left"><a href onclick="moveToLeft(550); return false;">&lsaquo;</a></div>
+<!--            <div class="arrow left"><a href onclick="moveToRight(37000); return false;">&laquo;</a></div>-->
+            <div class="arrow right"><a href onclick="moveToRight(3000); return false;">&raquo;</a></div>
+            <div class="arrow right"><a href onclick="moveToRight(550); return false;">&rsaquo;</a></div>
             <div class="dates">
             </div>
           </div>
@@ -51,6 +56,21 @@
               <tr><td><?=$f ?></td><td><button onclick="location.href='scripts/<?=$f ?>/<?=$f ?>.user.js'">Asenna</button></td></tr>
             <?php  } ?>
           </tbody></table>
+        </center>
+      </div>
+      <div id="paste" class="paste">
+        <center>
+          <h2>Paste</h2>
+          <div class="oldPaste">
+            <textarea class="newPaste" id="oldPaste"></textarea>
+          </div>
+          <div class="newPaste">
+            <h3>Uusi paste:</h3>
+            <form method='POST'>
+              <textarea class="newPaste" id="newPaste" name="text"></textarea>
+              <div class="update"><input type="submit" value="Lähetä" onclick="sendPaste(); return false;"></div>
+            </form>
+          </div>
         </center>
       </div>
       <div id="personal" class="personal"><center><h2>Omasivu</h2><?=$_SESSION["user"]["username"] ?>, tämä on sinun oma sivusi!</center></div>

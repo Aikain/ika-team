@@ -99,7 +99,8 @@ a {
 .arrow {
   font-size: 20px;
   font-weight: 900;
-  margin-top: -4px;
+  margin-top: -5px;
+  padding: 0px 2px;
   position: relative;
 }
 .arrow.left {
@@ -114,7 +115,7 @@ a {
   overflow-y: hidden;
   white-space: nowrap;
   overflow-x: hidden;
-  width: 600px;
+  width: 580px;
 }
 .date {
   display:inline-block;
@@ -209,7 +210,16 @@ a {
   width: 80px;
   outline: 0;
 }
-
+.oldPaste {
+  padding-bottom: 20px;
+  width: 600px;
+  border-style: none none groove none;
+}
+.newPaste {
+  width: 600px;
+  height: 150px;
+  outline: 0;
+}
 /* https://proto.io/freebies/onoff/ */
 .onoffswitch {
     position: relative; width: 90px;
