@@ -20,9 +20,9 @@
 
   if ( $rivi ) die("Käyttäjä on jo olemassa <a href='register.php'>Takaisin<a>");
 
-  $sql = "INSERT INTO members (username, password) VALUES ('$name', '$pass')";
+  $sql = "INSERT INTO members (username, password, team) VALUES (?, ?, ?)";
   $kysely = $yhteys->prepare($sql);
-  $kysely->execute(array($name, $pass));
+  $kysely->execute(array($name, $pass, 1));
 
   header("Location: login.php");
   die("Rekisteröityminen onnistui.");
