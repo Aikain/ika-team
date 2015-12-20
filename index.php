@@ -23,6 +23,7 @@
         <div class="topic"><a href="#paste/">Paste</a> | </div>
         <div class="topic"><a href="#personal/">Omasivu</a> | </div>
         <div class="topic"><a href="#profile/">Profiili</a> | </div>
+        <div class="topic"><a href="//ikafi.gosu.fi/">Ikafi</a> | </div>
         <div class="topic"><a href="logout.php">Kirjaudu ulos</a></div>
       </div>
     </div>
