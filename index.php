@@ -32,7 +32,7 @@
       <div id="logs" class="logs"">
         <center>
           <h2>Logit</h2>
-          <div class="channels"><?php foreach (glob("log/*") as $f) { $f = explode("/", $f)[1]; $f = substr($f, 0, strrpos( $f, '.')); ?>
+          <div class="channels"><?php foreach (glob("log/*") as $f) { $f = "#" . explode("/", $f)[1]; ?>
             <div class="channel"><a href="#logs/<?=$f ?>/today"><?=$f ?></a></div>
           <?php  } ?></div>
           <div class="datebar">
