@@ -88,6 +88,12 @@
                   <input type="text" name="username" value="<?=$_SESSION['user']['username'] ?>" readonly>
                 </div>
               </div>
+              <div class="setting">
+                <div class="settingName">Sähköposti-osoite</div>
+                <div class="settingValue">
+                  <input type="text" name="email" value="<?=$_SESSION['user']['email'] ?>">
+                </div>
+              </div>
             </div>
             <div class="settingGroup">
               <div class="setting">

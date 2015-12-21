@@ -5,7 +5,7 @@
   $name = $_POST['username'];
   $pass = md5($_POST['password']);
 
-  $sql = "SELECT id, username, jpl, mode, nickchange, nickcolor, color FROM members WHERE username = ? and password = ?";
+  $sql = "SELECT id, username, jpl, mode, nickchange, nickcolor, color, team, email FROM members WHERE username = ? and password = ?";
   $kysely = $yhteys->prepare($sql);
   $kysely->execute(array($name, $pass));
 
