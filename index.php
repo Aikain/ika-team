@@ -135,7 +135,7 @@
               <div class="setting">
                 <div class="settingName">Nimenvaihdot</div>
                 <div class="settingValue">
-                  <div class="onoffswitch"><input type="checkbox" name="namechange" class="onoffswitch-checkbox" id="namechange" <?=$_SESSION["user"]["nickchange"] == "1" ? "checked" : "" ?>>
+                  <div class="onoffswitch"><input type="checkbox" name="nickchange" class="onoffswitch-checkbox" id="namechange" <?=$_SESSION["user"]["nickchange"] == "1" ? "checked" : "" ?>>
                     <label class="onoffswitch-label" for="namechange"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label>
                   </div>
                 </div>
