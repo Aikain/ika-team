@@ -1,4 +1,4 @@
-var page, channel, date;
+var page, channel, date, user;
 $(window).on('load', function() {
   if (location.href.indexOf("index.php") != -1) {
     location.href = location.href.replace("index.php", "");
@@ -27,23 +27,30 @@ function update() {
     $(".datelog").hide();
 
     oldChannel = channel;
-    channel = location.href.split("#")[2];
+    channel = location.href.split("#logs/")[1];
     if (!channel) {
       $(".datebar").hide();
       return;
     }
+    user = channel.indexOf("#") == -1;
+    $(".date a").each(function() { $(this).attr("href", $(this).attr("href").replace("#logs/#", "#logs/"));  });
+    if (!user) {
+      $(".date a").each(function() { $(this).attr("href", $(this).attr("href").replace("#logs/", "#logs/#"));  });
+    }
+
+    channel = channel.replace("#", "");
     channel = channel.split("/")[0];
     if (oldChannel != "" && oldChannel != channel) {
-      $(".date a").each(function() { $(this).attr("href", $(this).attr("href").replace(oldChannel, channel));  })
+      $(".date a").each(function() { $(this).attr("href", $(this).attr("href").replace(oldChannel, channel));  });
     }
 
     $(".channel a").filter(function() {
-      return $(this).text() == "#" + channel;
+      return $(this).text() == "#" + channel || $(this).text() == channel;
     }).css("font-size", "25px").css("font-weight", "bold");
 
     $(".datebar").show();
 
-    date = location.href.split("#")[2].split("/")[1];
+    date = location.href.split("#logs/")[1].split("/")[1];
     if (!date) {
       $(".datelogs").hide();
       return;
@@ -54,7 +61,7 @@ function update() {
     }
 
     $(".date a").filter(function() {
-      return $(this).attr('href') == "#logs/#" + channel + "/" + date;
+      return $(this).attr('href') == "#logs/" + (user ? "" : "#") + channel + "/" + date;
     }).css("font-size", "1.2em").css("font-weight", "bold");
 
     if ($("[id*='log-" + channel + "-" + date + "']").length) {
@@ -96,7 +103,7 @@ function getLog() {
   $(".datelogs").append(d);
   d.children().css("height", window.innerHeight - 350 + "px");
   d.css("display", "inline-block");
-  $.get("log.php?channel=" + channel + "&date=" + date, {dataType: 'html'}, function(data) {
+  $.get("log.php?channel=" + channel + "&date=" + date + (user ? "&user" : ""), {dataType: 'html'}, function(data) {
     a = this.url.split("?")[1].split("&");
     updateLog($("[id*='log-" + a[0].split("=")[1] + "-" + a[1].split("=")[1] + "']"), data)
   }).fail(function(data) {
@@ -137,7 +144,7 @@ function createDate() {
   }
   d = d.getFullYear() + "-" + pad(d.getMonth()+1+"") + "-" + pad(d.getDate()+""); 
   text = text.length == 0 ? d : text;
-  div = $("<div class='date' id='date" + d + "'><a href='#logs/#" + channel + "/" + text + "' >" + text + "</a></div>");
+  div = $("<div class='date' id='date" + d + "'><a href='#logs/" + (user ? "" : "#") + channel + "/" + text + "' >" + text + "</a></div>");
   $(".dates").append(div);
   width += div.outerWidth(true);
 }
@@ -154,7 +161,7 @@ function reverseCreateDate() {
       text = d.getFullYear() + "-" + pad(d.getMonth()+1+"") + "-" + pad(d.getDate()+"");
     }
     d = d.getFullYear() + "-" + pad(d.getMonth()+1+"") + "-" + pad(d.getDate()+"");
-    div = $("<div class='date' id='date" + d + "'><a href='#logs/#" + channel + "/" + text + "' >" + text + "</a></div>");
+    div = $("<div class='date' id='date" + d + "'><a href='#logs/" + (user ? "" : "#") + channel + "/" + text + "' >" + text + "</a></div>");
     $(".dates").prepend(div);
     $(".dates").scrollLeft($(".dates").scrollLeft() + div.outerWidth(true));
     width += div.outerWidth(true);

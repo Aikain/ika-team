@@ -34,7 +34,9 @@
           <h2>Logit</h2>
           <div class="channels"><?php foreach (glob("log/*") as $f) { $f = "#" . explode("/", $f)[1]; ?>
             <div class="channel"><a href="#logs/<?=$f ?>/today"><?=$f ?></a></div>
-          <?php  } ?></div>
+            <?php  } ?>
+            <div class="channel"><a href="#logs/<?=$_SESSION['user']['username'] ?>/today"><?=$_SESSION["user"]["username"] ?></a></div>
+          </div>
           <div class="datebar">
 <!--            <div class="arrow left"><a href onclick="moveToLeft(37000); return false;">&laquo;</a></div>-->
             <div class="arrow left"><a href onclick="moveToLeft(3000); return false;">&laquo;</a></div>
