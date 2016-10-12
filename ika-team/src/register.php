@@ -5,6 +5,7 @@
 <html>
     <head>
         <title>ikariam.fi-Team - Sisäänkirjautuminen</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="login.css" />
     </head>
     <body id="body">
