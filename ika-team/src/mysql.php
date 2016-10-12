@@ -1,6 +1,6 @@
 <?php
   try {
-    $yhteys = new PDO("mysql:host=localhost;dbname=ika_team", "ika-team", "yaruKaidouPhoohi9aef9Joo6Gimoh0a");
+    $yhteys = new PDO("mysql:host=mysql;dbname=ika_team", "root", "yaruKaidouPhoohi9aef9Joo6Gimoh0a");
   } catch (PDOException $e) {
     die("VIRHE: " . $e->getMessage());
   }

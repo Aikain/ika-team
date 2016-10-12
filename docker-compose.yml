@@ -7,3 +7,21 @@ services:
       - "0.0.0.0:5562:80"
     volumes:
       - /srv/data/ika-team/log:/var/www/html/log
+    devices:
+      - /dev/fuse:/dev/fuse:rwm
+    cap_add:
+      - SYS_ADMIN
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=yaruKaidouPhoohi9aef9Joo6Gimoh0a
+      - MYSQL_DATABASE=ika_team
+    volumes:
+      - persistent_db:/var/lib/mysql
+
+volumes:
+  persistent_db:
+   driver: local
+
