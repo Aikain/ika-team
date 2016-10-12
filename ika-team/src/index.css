@@ -10,6 +10,7 @@ body {
 .top {
   background-color: #2F343A;
   color: #80CEB9;
+  display: inline-block;
   width: 100%;
   height: 150px;
   text-align:center;
@@ -63,6 +64,7 @@ h1 {
   vertical-align:middle;
   font-size: 3em;
   font-family: bebas neue;
+  display: inline;
 }
 .topics {
   width: 95%;
