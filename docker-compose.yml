@@ -1,0 +1,9 @@
+version: "2"
+services:
+  ika-team:
+    build: ika-team
+    restart: always
+    ports:
+      - "0.0.0.0:5562:80"
+    volumes:
+      - /srv/data/ika-team/log:/var/www/html/log
