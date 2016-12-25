@@ -93,8 +93,8 @@
 
   if (isset($_REQUEST["user"])) {
     foreach (glob("logs/*") as $f) {
-      if (!checkPrivileges($f)) continue;
       $f = substr($f, 6, -4);
+      if (!checkPrivileges($f)) continue;
       echo "<h3>--- $f ---</h3>";
       updateChannelLog($f, $d);
       echoChannelLog($f, $d, $c);
