@@ -86,12 +86,14 @@
   $ajax = true;
   include("login_success.php");
   include("mysql.php");
+  include("privileges.php");
   if (!isset($_REQUEST["channel"]) || !isset($_REQUEST["date"])) die("Tarvitaan kanava ja päivä!");
   $c = $_REQUEST["channel"];
   $d = getD();
 
   if (isset($_REQUEST["user"])) {
     foreach (glob("logs/*") as $f) {
+      if (!checkPrivileges($f)) continue;
       $f = substr($f, 6, -4);
       echo "<h3>--- $f ---</h3>";
       updateChannelLog($f, $d);
@@ -100,6 +102,7 @@
     }
   } else {
     if (!file_exists("logs/#" . $c . ".log")) die("Kanavan ($c) lokeja ei ole.");
+    if (!checkPrivileges($c)) die("Sinulla ei ole oikeuksia tähän kanavaan!");
     updateChannelLog($c, $d);
     echoChannelLog($c, $d, false);
   }
