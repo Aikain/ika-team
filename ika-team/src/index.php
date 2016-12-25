@@ -1,6 +1,7 @@
 <?php
   include("login_success.php");
   include("mysql.php");
+  include("privileges.php");
 ?>
 <html lang="fi">
   <head>
@@ -32,7 +33,7 @@
       <div id="logs" class="logs"">
         <center>
           <h2>Logit</h2>
-          <div class="channels"><?php foreach (glob("log/*") as $f) { $f = "#" . explode("/", $f)[1]; ?>
+          <div class="channels"><?php foreach (glob("log/*") as $f) { $f = explode("/", $f)[1]; if (!checkPrivileges($f)) continue; $f = "#" . $f; ?>
             <div class="channel"><a href="#logs/<?=$f ?>/today"><?=$f ?></a></div>
             <?php  } ?>
             <div class="channel"><a href="#logs/<?=$_SESSION['user']['username'] ?>/today"><?=$_SESSION["user"]["username"] ?></a></div>

@@ -8,5 +8,6 @@
   );
 
   function checkPrivileges($channel) {
+    global $privs;
     return $_SESSION["user"]["role"] >= $privs[$channel];
   }
