@@ -11,6 +11,7 @@ services:
       - /dev/fuse:/dev/fuse:rwm
     cap_add:
       - SYS_ADMIN
+    privileged: true
     depends_on:
       - mysql
   mysql:
