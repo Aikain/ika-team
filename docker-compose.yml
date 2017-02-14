@@ -15,13 +15,9 @@ services:
       - mysql
   mysql:
     image: mysql:latest
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=yaruKaidouPhoohi9aef9Joo6Gimoh0a
       - MYSQL_DATABASE=ika_team
     volumes:
-      - persistent_db:/var/lib/mysql
-
-volumes:
-  persistent_db:
-   driver: local
-
+      - /srv/data/ika-team/mysql:/var/lib/mysql
