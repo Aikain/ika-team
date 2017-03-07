@@ -3,26 +3,30 @@
 
     v. 0.1
      -Leikitty koodaajaa.
-     -S‰‰detty paljon.
+     -S√§√§detty paljon.
 
     v. 1.0
      -Pyydetty wiliam apuun.
      -Valmis. :D
 
+    v. 1.1
+     -Bugikorjaus: Sulkemisen j√§lkeen jos avattiin heti uudestaan resurssien m√§√§r√§ ei ilmestynyt.
 
 */
 // ==UserScript==
 // @name         Barbaarien resujen laskija
 // @namespace    ikariamtyokalu
-// @version      1.0
-// @description  Laskee yhteen barbaareilta ryˆstett‰viss‰ olevat resurssit.
+// @version      1.1
+// @description  Laskee yhteen barbaareilta ry√∂stett√§viss√§ olevat resurssit.
 // @author       Joppe151617
 // @include      http://*.ikariam.gameforge.com*
 // @include      https://*.ikariam.gameforge.com*
 // @require      https://code.jquery.com/jquery-latest.js
 // ==/UserScript==
 
-$(document).ready(function() {
+var alota = ajaxHandlerCall;
+ajaxHandlerCall = function(a) {
+  alota(a);
 
 function asd() {
   setTimeout(function() {
@@ -35,4 +39,4 @@ function asd() {
   }, 1000);
 }
 asd();
-});
+};
