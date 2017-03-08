@@ -19,7 +19,7 @@
 // ==UserScript==
 // @name         Barbaarien resujen laskija
 // @namespace    ikariamtyokalu
-// @version      1.1
+// @version      1.2
 // @description  Laskee yhteen barbaareilta ryöstettävissä olevat resurssit.
 // @author       Joppe151617
 // @include      http://*.ikariam.gameforge.com*
