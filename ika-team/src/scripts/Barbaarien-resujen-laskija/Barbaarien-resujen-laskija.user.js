@@ -15,11 +15,14 @@
     v. 1.2
      -Bugikorjaus: Resurssi summa ilmestyi liian monta kertaa.
 
+    v. 1.3
+     - Korjattu encoding (ISO-8859-1 -> UTF-8)
+
 */
 // ==UserScript==
 // @name         Barbaarien resujen laskija
 // @namespace    ikariamtyokalu
-// @version      1.2
+// @version      1.3
 // @description  Laskee yhteen barbaareilta ryöstettävissä olevat resurssit.
 // @author       Joppe151617
 // @include      http://*.ikariam.gameforge.com*
