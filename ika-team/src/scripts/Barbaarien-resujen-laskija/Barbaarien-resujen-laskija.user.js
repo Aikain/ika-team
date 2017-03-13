@@ -3,14 +3,14 @@
 
     v. 0.1
      -Leikitty koodaajaa.
-     -S‰‰detty paljon.
+     -S√§√§detty paljon.
 
     v. 1.0
      -Pyydetty wiliam apuun.
      -Valmis. :D
 
     v. 1.1
-     -Bugikorjaus: Sulkemisen j‰lkeen jos avattiin heti uudestaan resurssien m‰‰r‰ ei ilmestynyt.
+     -Bugikorjaus: Sulkemisen j√§lkeen jos avattiin heti uudestaan resurssien m√§√§r√§ ei ilmestynyt.
 
     v. 1.2
      -Bugikorjaus: Resurssi summa ilmestyi liian monta kertaa.
@@ -20,7 +20,7 @@
 // @name         Barbaarien resujen laskija
 // @namespace    ikariamtyokalu
 // @version      1.2
-// @description  Laskee yhteen barbaareilta ryˆstett‰viss‰ olevat resurssit.
+// @description  Laskee yhteen barbaareilta ry√∂stett√§viss√§ olevat resurssit.
 // @author       Joppe151617
 // @include      http://*.ikariam.gameforge.com*
 // @include      https://*.ikariam.gameforge.com*
