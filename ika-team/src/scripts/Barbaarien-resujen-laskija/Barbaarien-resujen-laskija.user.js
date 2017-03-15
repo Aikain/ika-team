@@ -17,12 +17,15 @@
 
     v. 1.3
      - Korjattu encoding (ISO-8859-1 -> UTF-8)
+	 
+	v. 1.4
+     - Lis�tty "turha" parametri ajaxHandlerCall functioon.
 
 */
 // ==UserScript==
 // @name         Barbaarien resujen laskija
 // @namespace    ikariamtyokalu
-// @version      1.3
+// @version      1.4
 // @description  Laskee yhteen barbaareilta ryöstettävissä olevat resurssit.
 // @author       Joppe151617
 // @include      http://*.ikariam.gameforge.com*
@@ -31,8 +34,8 @@
 // ==/UserScript==
 
 var alota = ajaxHandlerCall;
-ajaxHandlerCall = function(a) {
-  alota(a);
+ajaxHandlerCall = function(a,b) {
+  alota(a,b);
 if (a.startsWith("?view=barbarianVillage")) {
 function asd() {
   setTimeout(function() {
