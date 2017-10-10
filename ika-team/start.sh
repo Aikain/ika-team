@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sshfs -o allow_other,StrictHostKeyChecking=no,IdentityFile=~/.ssh/id_rsa,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 -p 8022 aikain@gosu.fi.fi:.irssi/log/ika-team/ /var/www/html/logs
+sshfs -o allow_other,StrictHostKeyChecking=no,IdentityFile=~/.ssh/id_rsa,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 -p 22 aikain@aika.in:.irssi/log/ika-team/ /var/www/html/logs
 
 VOLUME_HOME="/var/lib/mysql"
 
