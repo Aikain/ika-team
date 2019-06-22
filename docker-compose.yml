@@ -6,7 +6,7 @@ services:
     ports:
       - "0.0.0.0:5562:80"
     volumes:
-      - /srv/data/ika-team/log:/var/www/html/log
+      - /srv/data/team.fi.ikariam.aika.in/log:/var/www/html/log
     devices:
       - /dev/fuse:/dev/fuse:rwm
     cap_add:
@@ -21,4 +21,4 @@ services:
       - MYSQL_ROOT_PASSWORD=yaruKaidouPhoohi9aef9Joo6Gimoh0a
       - MYSQL_DATABASE=ika_team
     volumes:
-      - /srv/data/ika-team/mysql:/var/lib/mysql
+      - /srv/data/team.fi.ikariam.aika.in/mysql:/var/lib/mysql
