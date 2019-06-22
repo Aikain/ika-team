@@ -101,9 +101,9 @@
       echo "\n";
     }
   } else {
-    if (!file_exists("logs/#" . $c . ".log")) die("Kanavan ($c) lokeja ei ole.");
+//    if (!file_exists("logs/#" . $c . ".log")) die("Kanavan ($c) lokeja ei ole.");
     if (!checkPrivileges($c)) die("Sinulla ei ole oikeuksia tähän kanavaan!");
-    updateChannelLog($c, $d);
+    if (file_exists("logs/#" . $c . ".log")) updateChannelLog($c, $d);
     echoChannelLog($c, $d, false);
   }
 ?>
